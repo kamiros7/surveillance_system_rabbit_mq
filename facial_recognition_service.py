@@ -8,7 +8,7 @@ channel.exchange_declare(exchange='topic_processed_frame', exchange_type='topic'
 
 result = channel.queue_declare(queue='', exclusive=True)
 queue_name = result.method.queue
-channel.queue_bind(exchange='topic_initial_frame', queue=queue_name, routing_key='video.#')
+channel.queue_bind(exchange='topic_processed_frame', queue=queue_name, routing_key='')
 
 print(' [*] Waiting for processed images. To exit press CTRL+C')
 

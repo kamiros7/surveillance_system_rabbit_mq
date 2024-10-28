@@ -16,10 +16,11 @@ print(' [*] Waiting for images. To exit press CTRL+C')
 routing_key = ''
 def callback(ch, method, properties, body):
     print(f" [x] Received {body} with routing key {method.routing_key}")
-
+    message = body.decode('utf-8')
     # Here i must be verify the message
-    body += '_processed'
-    ch.basic_publish(exchange='topic_processed_frame', routing_key=routing_key, body=body)
+    message += '_processed'
+    new_body = message.encode('utf-8')
+    ch.basic_publish(exchange='topic_processed_frame', routing_key=routing_key, body=new_body)
 
 channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=True)
 channel.start_consuming()
