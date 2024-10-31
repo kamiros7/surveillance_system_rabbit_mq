@@ -24,8 +24,8 @@ channel = connection.channel()
 channel.exchange_declare(exchange='topic_initial_frame', exchange_type='topic')
 
 routing_key = 'video.upload' #Maybe consider the input
-#message = f'frame_{(sys.argv[1])}' + '|ASSINATURA' or 'frame_0' + 'teste'
-message = f'frame_1' or 'frame_0' + 'teste'
+#message = f'frame_{(sys.argv[1])}' or 'frame_0'
+message = f'frame_{sys.argv[1]}' if len(sys.argv) > 1 else 'frame_0'
 
 message = signMessage(message)  #assina a mensagem
 
